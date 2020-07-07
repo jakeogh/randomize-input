@@ -40,8 +40,9 @@ APP_NAME = 'randompipe'
 @click.command()
 @click.option('--verbose', is_flag=True)
 @click.option('--debug', is_flag=True)
+@click.option('--head', type=int)
 @click.option("--null", is_flag=True)
-def cli(verbose, debug, null):
+def cli(verbose, debug, head, null):
 
     byte = b'\n'
     if null:
@@ -53,6 +54,6 @@ def cli(verbose, debug, null):
     if verbose:
         ic(config, config_mtime)
 
-    for item in randomize_iterator(input_iterator(null=null, verbose=verbose), verbose=verbose):
+    for item in randomize_iterator(input_iterator(null=null, verbose=verbose, input_limit=head), verbose=verbose):
         print(item, end=byte.decode('utf8'))
 

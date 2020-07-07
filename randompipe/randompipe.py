@@ -16,14 +16,12 @@
 # pylint: disable=W0201     # attribute defined outside __init__
 ## pylint: disable=W0703     # catching too general exception
 
-import os
-import sys
+#import os
+#import sys
 import click
-from pathlib import Path
+#from pathlib import Path
 from shutil import get_terminal_size
 from icecream import ic
-from kcl.configops import click_read_config
-from kcl.configops import click_write_config_entry
 from kcl.inputops import input_iterator
 from kcl.iterops import randomize_iterator
 
@@ -36,13 +34,15 @@ ic.lineWrapWidth, _ = get_terminal_size((80, 20))
 APP_NAME = 'randompipe'
 
 
-# DONT CHANGE FUNC NAME
 @click.command()
 @click.option('--verbose', is_flag=True)
 @click.option('--debug', is_flag=True)
 @click.option('--head', type=int)
+@click.option('--not-random', is_flag=True)
 @click.option("--null", is_flag=True)
-def cli(verbose, debug, head, null):
+def cli(verbose, debug, head, not_random, null):
+
+    random = not not_random
 
     byte = b'\n'
     if null:
@@ -50,6 +50,9 @@ def cli(verbose, debug, head, null):
 
     iterator = input_iterator(null=null, verbose=verbose, head=head)
 
-    for item in randomize_iterator(iterator, verbose=verbose):
+    if random:
+        iterator = randomize_iterator(iterator, verbose=verbose)
+
+    for item in iterator:
         print(item, end=byte.decode('utf8'))
 

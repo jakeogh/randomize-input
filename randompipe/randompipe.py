@@ -54,6 +54,8 @@ def cli(verbose, debug, head, null):
     if verbose:
         ic(config, config_mtime)
 
-    for item in randomize_iterator(input_iterator(null=null, verbose=verbose, head=head), verbose=verbose):
+    iterator = input_iterator(null=null, verbose=verbose, head=head)
+
+    for item in randomize_iterator(iterator, verbose=verbose):
         print(item, end=byte.decode('utf8'))
 

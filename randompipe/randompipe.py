@@ -48,12 +48,6 @@ def cli(verbose, debug, head, null):
     if null:
         byte = b'\x00'
 
-    config, config_mtime = click_read_config(click_instance=click,
-                                             app_name=APP_NAME,
-                                             verbose=verbose)
-    if verbose:
-        ic(config, config_mtime)
-
     iterator = input_iterator(null=null, verbose=verbose, head=head)
 
     for item in randomize_iterator(iterator, verbose=verbose):

@@ -38,8 +38,8 @@ APP_NAME = 'randompipe'
 @click.option('--verbose', is_flag=True)
 @click.option('--debug', is_flag=True)
 @click.option('--head', type=int)
-@click.option('--max-wait-time', type=int)
-@click.option('--min-pool-size', type=int)
+@click.option('--max-wait-time', type=float, default=1.0)
+@click.option('--min-pool-size', type=int, default=2)
 @click.option('--not-random', is_flag=True)
 @click.option("--printn", is_flag=True)
 def cli(verbose,
@@ -49,6 +49,9 @@ def cli(verbose,
         printn,
         max_wait_time,
         min_pool_size):
+
+    assert max_wait_time
+    assert min_pool_size
 
     null = not printn
     random = not not_random

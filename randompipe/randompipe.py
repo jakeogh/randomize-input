@@ -38,10 +38,19 @@ APP_NAME = 'randompipe'
 @click.option('--verbose', is_flag=True)
 @click.option('--debug', is_flag=True)
 @click.option('--head', type=int)
+@click.option('--max-wait-time', type=int)
+@click.option('--min-pool-size', type=int)
 @click.option('--not-random', is_flag=True)
-@click.option("--null", is_flag=True)
-def cli(verbose, debug, head, not_random, null):
+@click.option("--printn", is_flag=True)
+def cli(verbose,
+        debug,
+        head,
+        not_random,
+        printn,
+        max_wait_time,
+        min_pool_size):
 
+    null = not printn
     random = not not_random
 
     byte = b'\n'
@@ -51,7 +60,10 @@ def cli(verbose, debug, head, not_random, null):
     iterator = input_iterator(null=null, verbose=verbose, head=head)
 
     if random:
-        iterator = randomize_iterator(iterator, verbose=verbose)
+        iterator = randomize_iterator(iterator,
+                                      verbose=verbose,
+                                      max_wait_time=max_wait_time,
+                                      min_pool_size=min_pool_size)
 
     for item in iterator:
         print(item, end=byte.decode('utf8'))

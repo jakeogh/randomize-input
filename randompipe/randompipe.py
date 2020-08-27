@@ -65,6 +65,7 @@ def cli(verbose,
     if random:
         iterator = randomize_iterator(iterator,
                                       verbose=verbose,
+                                      debug=debug,
                                       max_wait_time=max_wait_time,
                                       min_pool_size=min_pool_size)
 

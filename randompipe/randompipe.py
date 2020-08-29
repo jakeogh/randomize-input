@@ -16,17 +16,12 @@
 # pylint: disable=W0201     # attribute defined outside __init__
 ## pylint: disable=W0703     # catching too general exception
 
-#import os
-#import sys
 import click
-#from pathlib import Path
-from shutil import get_terminal_size
 from icecream import ic
 from kcl.inputops import input_iterator
 from kcl.iterops import randomize_iterator
 
 ic.configureOutput(includeContext=True)
-ic.lineWrapWidth, _ = get_terminal_size((80, 20))
 # import IPython; IPython.embed()
 # import pdb; pdb.set_trace()
 # from pudb import set_trace; set_trace(paused=False)

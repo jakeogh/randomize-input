@@ -48,6 +48,9 @@ def cli(verbose,
     assert max_wait_time
     assert min_pool_size
 
+    if min_pool_size < 2:
+        min_pool_size = 2
+
     null = not printn
     random = not not_random
 

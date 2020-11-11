@@ -18,7 +18,7 @@
 
 import click
 from icecream import ic
-from kcl.inputops import input_iterator
+from kcl.iterops import input_iterator
 from kcl.iterops import randomize_iterator
 
 ic.configureOutput(includeContext=True)

@@ -42,7 +42,7 @@ def append_to_set(*,
                   max_wait_time: float,
                   min_pool_size: float,  # the_set always has 1 item
                   verbose: bool = False,
-                  debug: bool = False):
+                  debug: bool = False,):
 
     if verbose:
         ic(max_wait_time, min_pool_size)
@@ -50,10 +50,14 @@ def append_to_set(*,
     assert max_wait_time > 0.01
     assert min_pool_size >= 2
 
+    start_time = time.time()
     time_loops = 0
     while len(the_set) < min_pool_size:
-        start_time = time.time()
-        while (time.time() - start_time) < max_wait_time:
+        loop_start_time = time.time()
+        time_loops = 0
+
+        # add to the_set for max_wait_time
+        while (time.time() - loop_start_time) < max_wait_time:
             time_loops += 1
             try:
                 the_set.add(next(iterator))
@@ -70,6 +74,7 @@ def append_to_set(*,
         if len(the_set) < min_pool_size:
             ic(len(the_set), 'waiting for', min_pool_size)
 
+    ic(time.time() - start_time)
     assert time_loops > 0
     return the_set
 

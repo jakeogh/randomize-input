@@ -68,8 +68,6 @@ def append_to_set(*,
     return the_set
 
 
-
-
 # add time-like memory limit
 # the longer the max_wait, the larger buffer_set will be,
 # resulting in better mixing

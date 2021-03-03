@@ -74,7 +74,7 @@ def append_to_set(*,
         if len(the_set) < min_pool_size:
             ic(len(the_set), 'waiting for', min_pool_size)
 
-    ic(time.time() - start_time)
+    ic(len(the_set), time.time() - start_time)
     assert time_loops > 0
     return the_set
 

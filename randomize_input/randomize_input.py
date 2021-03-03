@@ -36,13 +36,6 @@ except ImportError:
     ic = eprint
 
 
-
-
-#ic.configureOutput(includeContext=True)
-# import IPython; IPython.embed()
-# import pdb; pdb.set_trace()
-# from pudb import set_trace; set_trace(paused=False)
-
 def append_to_set(*,
                   iterator,
                   the_set,

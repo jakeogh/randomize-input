@@ -48,7 +48,6 @@ def append_to_set(*,
     assert min_pool_size >= 2
 
     time_loops = 0
-    eprint("\nWaiting for min_pool_size: {}\n".format(min_pool_size))
     while len(the_set) < min_pool_size:
         start_time = time.time()
         while (time.time() - start_time) < max_wait_time:
@@ -57,6 +56,9 @@ def append_to_set(*,
                 the_set.add(next(iterator))
             except StopIteration:
                 pass
+
+        if time_loops == 3:
+            ic('Waiting for:', min_pool_size)
 
         if time_loops > 1:
             eprint("\nWarning: min_pool_size: {} was not reached in max_wait_time: {}s so actual wait time was: {}x {}s\n".format(min_pool_size, max_wait_time, time_loops, max_wait_time * time_loops))
@@ -110,12 +112,9 @@ def randomize_input(iterator, *,
         next_item = list(buffer_set).pop(random_index)
         buffer_set.remove(next_item)
         if debug:
-            eprint("Chose 1 item out of", buffer_set_length)
+            ic('Chose 1 item out of:', buffer_set_length)
 
-        if debug:
-            eprint("len(buffer_set):", buffer_set_length - 1)
-
-        if verbose:
+        if verbose or debug:
             ic(len(buffer_set), random_index, next_item)
 
         yield next_item

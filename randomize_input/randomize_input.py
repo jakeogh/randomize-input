@@ -131,7 +131,6 @@ def randomize_input(iterator, *,
         yield next_item
 
 
-
 @click.command()
 @click.option('--verbose', is_flag=True)
 @click.option('--debug', is_flag=True)

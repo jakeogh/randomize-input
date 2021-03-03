@@ -10,8 +10,8 @@ dependencies = ["icecream", "click", "colorama"]
 
 config = {
     "version": "0.1",
-    "name": "randompipe",
-    "url": "https://github.com/jakeogh/randompipe",
+    "name": "randomize_input",
+    "url": "https://github.com/jakeogh/randomize_input",
     "license": "ISC",
     "author": "Justin Keogh",
     "author_email": "github.com@v6y.net",
@@ -24,7 +24,7 @@ config = {
     "install_requires": dependencies,
     "entry_points": {
         "console_scripts": [
-            "randompipe=randompipe.randompipe:cli",
+            "randomize_input=randomize_input.randomize_input:cli",
         ],
     },
 }

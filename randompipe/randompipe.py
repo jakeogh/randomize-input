@@ -21,12 +21,10 @@ from icecream import ic
 from kcl.iterops import input_iterator
 from kcl.iterops import randomize_iterator
 
-ic.configureOutput(includeContext=True)
+#ic.configureOutput(includeContext=True)
 # import IPython; IPython.embed()
 # import pdb; pdb.set_trace()
 # from pudb import set_trace; set_trace(paused=False)
-
-APP_NAME = 'randompipe'
 
 
 @click.command()

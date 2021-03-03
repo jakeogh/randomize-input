@@ -44,6 +44,9 @@ def append_to_set(*,
                   verbose: bool = False,
                   debug: bool = False):
 
+    if verbose:
+        ic(max_wait_time, min_pool_size)
+
     assert max_wait_time > 0.01
     assert min_pool_size >= 2
 

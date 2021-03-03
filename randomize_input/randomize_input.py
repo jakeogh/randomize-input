@@ -52,9 +52,11 @@ def append_to_set(*,
 
     start_time = time.time()
     time_loops = 0
+    while_loops = 0
     while len(the_set) < min_pool_size:
         loop_start_time = time.time()
         time_loops = 0
+        while_loops += 1
 
         # add to the_set for max_wait_time
         while (time.time() - loop_start_time) < max_wait_time:
@@ -64,8 +66,8 @@ def append_to_set(*,
             except StopIteration:
                 pass
 
-        if time_loops == 3:
-            ic('Waiting for:', min_pool_size)
+            if time_loops == 3:
+                ic('Waiting for:', min_pool_size)
 
         if time_loops > 1:
             ic(min_pool_size, 'was not reached in', max_wait_time, time_loops)
@@ -74,7 +76,7 @@ def append_to_set(*,
         if len(the_set) < min_pool_size:
             ic(len(the_set), 'waiting for', min_pool_size)
 
-    ic(len(the_set), time.time() - start_time)
+    ic(while_loops, len(the_set), time.time() - start_time)
     assert time_loops > 0
     return the_set
 
@@ -83,11 +85,11 @@ def append_to_set(*,
 # the longer the max_wait, the larger buffer_set will be,
 # resulting in better mixing
 def randomize_input(iterator, *,
-                    min_pool_size,
+                    min_pool_size: int,
                     max_wait_time,
                     buffer_set=None,
-                    verbose=False,
-                    debug=False):
+                    verbose: bool = False,
+                    debug: bool = False):
 
     assert max_wait_time
     assert min_pool_size

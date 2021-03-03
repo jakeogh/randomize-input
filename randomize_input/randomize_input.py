@@ -71,12 +71,12 @@ def append_to_set(*,
 # add time-like memory limit
 # the longer the max_wait, the larger buffer_set will be,
 # resulting in better mixing
-def randomize_iterator(iterator, *,
-                       min_pool_size,
-                       max_wait_time,
-                       buffer_set=None,
-                       verbose=False,
-                       debug=False):
+def randomize_input(iterator, *,
+                    min_pool_size,
+                    max_wait_time,
+                    buffer_set=None,
+                    verbose=False,
+                    debug=False):
 
     assert max_wait_time
     assert min_pool_size
@@ -154,11 +154,11 @@ def cli(verbose,
     iterator = input_iterator(null=null, verbose=verbose, head=head)
 
     if random:
-        iterator = randomize_iterator(iterator,
-                                      verbose=verbose,
-                                      debug=debug,
-                                      max_wait_time=max_wait_time,
-                                      min_pool_size=min_pool_size)
+        iterator = randomize_input(iterator,
+                                   verbose=verbose,
+                                   debug=debug,
+                                   max_wait_time=max_wait_time,
+                                   min_pool_size=min_pool_size)
 
     for item in iterator:
         print(item, end=byte.decode('utf8'))

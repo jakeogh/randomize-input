@@ -21,7 +21,7 @@ import sys
 import time
 
 import click
-from kcl.iterops import input_iterator
+from enumerate_input import iterate_input
 
 
 def eprint(*args, **kwargs):
@@ -160,7 +160,17 @@ def cli(verbose,
     if null:
         byte = b'\x00'
 
-    iterator = input_iterator(null=null, verbose=verbose, head=head)
+    iterator = iterate_input(iterator=None,
+                             disable_stdin=False,
+                             dont_decode=False,
+                             tail=None,
+                             skip=None,
+                             null=null,
+                             verbose=verbose,
+                             debug=debug,
+                             random=False,
+                             loop=None,
+                             head=head,)
 
     if random:
         iterator = randomize_input(iterator,

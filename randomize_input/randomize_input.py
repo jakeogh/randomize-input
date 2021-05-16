@@ -42,7 +42,8 @@ def append_to_set(*,
                   max_wait_time: float,
                   min_pool_size: float,  # the_set always has 1 item
                   verbose: bool = False,
-                  debug: bool = False,):
+                  debug: bool = False,
+                  ):
 
     if verbose:
         ic(max_wait_time, min_pool_size)

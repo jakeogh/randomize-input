@@ -150,6 +150,7 @@ def cli(ctx,
         min_pool_size: int,
         ):
 
+    ctx.ensure_object(dict)
     assert max_wait_time
     assert min_pool_size
 

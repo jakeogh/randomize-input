@@ -186,5 +186,5 @@ def cli(ctx,
                                    min_pool_size=min_pool_size)
 
     for item in iterator:
-        print(item, end=end)
+        sys.stdout.buffer.write(item + end)
 

@@ -21,6 +21,7 @@ import sys
 import time
 
 import click
+from asserttool import nevd
 from enumerate_input import iterate_input
 
 
@@ -139,14 +140,15 @@ def randomize_input(iterator, *,
 @click.option('--max-wait-time', type=float, default=1.0)
 @click.option('--min-pool-size', type=int, default=2)
 @click.option('--not-random', is_flag=True)
-@click.option("--printn", is_flag=True)
-def cli(verbose,
-        debug,
-        head,
-        not_random,
-        printn,
-        max_wait_time,
-        min_pool_size):
+@click.pass_context
+def cli(ctx,
+        verbose: bool,
+        debug: bool,
+        head: int,
+        not_random: bool,
+        max_wait_time: float,
+        min_pool_size: int,
+        ):
 
     assert max_wait_time
     assert min_pool_size
@@ -154,16 +156,17 @@ def cli(verbose,
     if min_pool_size < 2:
         min_pool_size = 2
 
-    null = not printn
     random = not not_random
 
-    byte = b'\n'
-    if null:
-        byte = b'\x00'
+    null, end, verbose, debug = nevd(ctx=ctx,
+                                     printn=False,
+                                     ipython=False,
+                                     verbose=verbose,
+                                     debug=debug,)
 
     iterator = iterate_input(iterator=None,
                              disable_stdin=False,
-                             dont_decode=False,
+                             dont_decode=True,  # stdin is bytes
                              tail=None,
                              skip=None,
                              null=null,
@@ -182,5 +185,5 @@ def cli(verbose,
                                    min_pool_size=min_pool_size)
 
     for item in iterator:
-        print(item, end=byte.decode('utf8'))
+        print(item, end=end)
 
